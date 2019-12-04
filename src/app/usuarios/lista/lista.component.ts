@@ -13,6 +13,7 @@ export class ListaComponent implements OnInit {
 
   usuarios: Usuario[] = []; 
   loading: boolean;
+  error: any;
   //Sin ngrxEffects
   // constructor( public usuarioService: UsuarioService) { }
   constructor( private store: Store<AppState>) { }
@@ -25,7 +26,8 @@ export class ListaComponent implements OnInit {
     // })
     this.store.subscribe(state=> {
       this.usuarios = state.usuarios.users;
-      this.loading = state.usuarios.loading
+      this.loading = state.usuarios.loading;
+      this.error = state.usuarios.error;
     });    
     const accion = new fromUsuarios.CargarUsuariosAction();
     this.store.dispatch(accion);
